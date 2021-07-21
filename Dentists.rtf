@@ -1,0 +1,227 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Bold;\f1\fnil\fcharset0 Menlo-Regular;\f2\fswiss\fcharset0 Helvetica;
+}
+{\colortbl;\red255\green255\blue255;\red115\green158\blue202;\red170\green170\blue170;\red158\green158\blue158;
+\red238\green204\blue100;\red102\green151\blue104;\red193\green170\blue108;\red202\green197\blue128;\red192\green192\blue192;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c45098\c61961\c79216;\csgenericrgb\c66667\c66667\c66667;\csgenericrgb\c61961\c61961\c61961;
+\csgenericrgb\c93333\c80000\c39216;\csgenericrgb\c40000\c59216\c40784;\csgenericrgb\c75686\c66667\c42353;\csgenericrgb\c79216\c77255\c50196;\csgenericrgb\c75294\c75294\c75294;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b\fs18 \cf2 create
+\f1\b0 \cf3  
+\f0\b \cf2 database
+\f1\b0 \cf3  \cf4 dentists\cf5 ;\cf2 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Wypisz wszystkie dane z tabeli.\
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  * 
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\cf5 ;\cf4 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Wypisz rok oraz wskaznik first tooltip (first tooltip to wskaznik dentystow na 10000 mieszkancow).\
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  \cf7 "Period"\cf3 , \cf7 "First Tooltip"\cf3  
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\cf3  \cf5 ;\cf7 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- W wyniku powyzszego zapytania zamien nazwy kolumn na polskie nazwy.\
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  \cf7 "Period"\cf3 				\cf4 Rok\cf3 ,\cf7 \
+\cf3 		\cf7 "First Tooltip"\cf3 		\cf4 Wskaznik_dentystow_na_10000_mieszkancow\
+
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\cf3  \cf5 ;\cf4 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Wypisz dane krajow zaczynajacych sie na litere B lub tych z 2006 roku.\
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  *\'a0\cf2 \
+
+\f0\b from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\
+
+\f0\b \cf2 where
+\f1\b0 \cf3  \cf7 "Location"\cf3  
+\f0\b \cf2 like
+\f1\b0 \cf3  \cf8 'B%'\cf3 \'a0\cf7 \
+
+\f0\b \cf2 or
+\f1\b0 \cf3  \cf7 "Period"\cf3  = \cf9 2006\cf5 ;\cf7 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Wypisz dane krajow konczacych sie na "land".\
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  *\'a0\cf2 \
+
+\f0\b from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\
+
+\f0\b \cf2 where
+\f1\b0 \cf3  \cf7 "Location"\cf3  
+\f0\b \cf2 like
+\f1\b0 \cf3  \cf8 '%land'\cf5 ;\cf7 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Wyznacz srednia, wartosc minimalna, maskymalna wskaznika w calej bazie.\
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3 \'a0 
+\f0\b \cf7 avg
+\f1\b0 \cf3 (\cf7 "First Tooltip"\cf3 ),\cf7 \
+\cf3 		
+\f0\b \cf7 min
+\f1\b0 \cf3 (\cf7 "First Tooltip"\cf3 ),\cf7 \
+\cf3 		
+\f0\b \cf7 max
+\f1\b0 \cf3 (\cf7 "First Tooltip"\cf3 )\cf7 \
+
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\cf5 ;\cf4 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Porownaj powyzsze wyniki z wynikami dla Polski.\
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3 \'a0 
+\f0\b \cf7 avg
+\f1\b0 \cf3 (\cf7 "First Tooltip"\cf3 ),\cf7 \
+\cf3 		
+\f0\b \cf7 min
+\f1\b0 \cf3 (\cf7 "First Tooltip"\cf3 ),\cf7 \
+\cf3 		
+\f0\b \cf7 max
+\f1\b0 \cf3 (\cf7 "First Tooltip"\cf3 )\cf7 \
+
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\
+
+\f0\b \cf2 where
+\f1\b0 \cf3  \cf7 "Location"\cf3  = \cf8 'Poland'\cf5 ;\cf7 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Wypisz wszystkie dane z tabeli dla Polski w kolejnosci wg lat.\
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  *\cf2 \
+
+\f0\b from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\
+
+\f0\b \cf2 where
+\f1\b0 \cf3  \cf7 "Location"\cf3  = \cf8 'Poland'\cf7 \
+
+\f0\b \cf2 order
+\f1\b0 \cf3  
+\f0\b \cf2 by
+\f1\b0 \cf3  \cf7 "Period"\cf3  
+\f0\b \cf2 asc
+\f1\b0 \cf5 ;\cf2 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Wyznacz minimalny oraz maksymalny rok z tabeli.\
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3 \'a0 
+\f0\b \cf7 min
+\f1\b0 \cf3 (\cf7 "Period"\cf3 ),\cf7 \
+\cf3 		
+\f0\b \cf7 max
+\f1\b0 \cf3 (\cf7 "Period"\cf3 )\cf7 \
+
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\cf3  \cf5 ;\cf4 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Ktory kraj ma maksymalna wartosc wskaznika w ostatnim badanym roku?\
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  \cf7 "Location"\
+
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\cf3 \'a0\cf4 \
+
+\f0\b \cf2 where
+\f1\b0 \cf3  \cf7 "Period"\cf3  = \cf9 2019\cf3 \'a0\cf7 \
+
+\f0\b \cf2 order
+\f1\b0 \cf3  
+\f0\b \cf2 by
+\f1\b0 \cf3  \cf7 "First Tooltip"\cf3  
+\f0\b \cf2 desc
+\f1\b0 \cf3 \'a0\cf7 \
+
+\f0\b \cf2 limit
+\f1\b0 \cf3  \cf9 1\cf5 ;\cf2 \
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf6 -- Ktory kraj ma maksymalna warotsc wskaznika w pierwszym badanym roku?\
+\pard\pardeftab720\ri-46\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f0\b \cf2 select
+\f1\b0 \cf3  \cf7 "Location"\
+
+\f0\b \cf2 from
+\f1\b0 \cf3  \cf4 dentists_csv\cf3  \cf4 dc\cf3 \'a0\cf4 \
+
+\f0\b \cf2 where
+\f1\b0 \cf3  \cf7 "Period"\cf3  = \cf9 1990\cf3 \'a0\cf7 \
+
+\f0\b \cf2 order
+\f1\b0 \cf3  
+\f0\b \cf2 by
+\f1\b0 \cf3  \cf7 "First Tooltip"\cf3  
+\f0\b \cf2 desc
+\f1\b0 \cf3 \'a0\cf7 \
+
+\f0\b \cf2 limit
+\f1\b0 \cf3  \cf9 1\cf5 ;\cf2 \
+\pard\pardeftab720\ri-46\partightenfactor0
+
+\f2\fs24 \cf0 \
+}
