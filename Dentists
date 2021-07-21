@@ -1,0 +1,69 @@
+create database dentists;
+
+-- Wypisz wszystkie dane z tabeli.
+select * from dentists_csv dc;
+
+-- Wypisz rok oraz wskaznik first tooltip (first tooltip to wskaznik dentystow na 10000 mieszkancow).
+select "Period", "First Tooltip" from dentists_csv dc ;
+
+-- W wyniku powyzszego zapytania zamien nazwy kolumn na polskie nazwy.
+select "Period"				Rok,
+		"First Tooltip"		Wskaznik_dentystow_na_10000_mieszkancow
+from dentists_csv dc ;
+
+-- Wypisz dane krajow zaczynajacych sie na litere B lub tych z 2006 roku.
+
+select * 
+from dentists_csv dc
+where "Location" like 'B%' 
+or "Period" = 2006;
+
+-- Wypisz dane krajow konczacych sie na "land".
+
+select * 
+from dentists_csv dc
+where "Location" like '%land';
+
+-- Wyznacz srednia, wartosc minimalna, maskymalna wskaznika w calej bazie.
+
+select  avg("First Tooltip"),
+		min("First Tooltip"),
+		max("First Tooltip")
+from dentists_csv dc;
+
+-- Porownaj powyzsze wyniki z wynikami dla Polski.
+
+select  avg("First Tooltip"),
+		min("First Tooltip"),
+		max("First Tooltip")
+from dentists_csv dc
+where "Location" = 'Poland';
+
+-- Wypisz wszystkie dane z tabeli dla Polski w kolejnosci wg lat.
+select *
+from dentists_csv dc
+where "Location" = 'Poland'
+order by "Period" asc;
+
+-- Wyznacz minimalny oraz maksymalny rok z tabeli.
+select  min("Period"),
+		max("Period")
+from dentists_csv dc ;
+
+-- Ktory kraj ma maksymalna wartosc wskaznika w ostatnim badanym roku?
+
+select "Location"
+from dentists_csv dc 
+where "Period" = 2019 
+order by "First Tooltip" desc 
+limit 1;
+
+
+-- Ktory kraj ma maksymalna warotsc wskaznika w pierwszym badanym roku?
+
+select "Location"
+from dentists_csv dc 
+where "Period" = 1990 
+order by "First Tooltip" desc 
+limit 1;
+
