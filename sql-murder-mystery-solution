@@ -1,0 +1,32 @@
+select * 
+from person p
+left join interview i on p.id = i.person_id
+where (p.address_street_name = 'Northwestern Dr' 
+and p.address_number = (select max(address_number) from person
+where address_street_name = 'Northwestern Dr' ))
+--or p.address_number = (select min(address_number) from person
+--where address_street_name = 'Northwestern Dr' ))
+or  (p.address_street_name = 'Franklin Ave' 
+and p.name like 'Annabel%')
+or p.id = (select g.person_id 
+	from get_fit_now_member g
+	join person p on g.person_id = p.id
+	join drivers_license d on d.id = p.license_id
+	where g.id like '48Z%'
+	and g.membership_status = 'gold')
+or p.id = (
+select p.id from drivers_license d
+join person p on d.id = p.license_id
+join income i on i.ssn = p.ssn
+where d.car_make = 'Tesla'
+and d.car_model = 'Model S'
+and d.height BETWEEN 65 and 67
+and d.hair_color = 'red'
+and p.id in (with a as (
+select person_id, count(*)  from facebook_event_checkin
+where event_name like 'SQL%'
+and date between '20171201' and '20171231'
+group  by person_id
+having count(*)  = 3
+)
+select person_id from a))
